@@ -1,0 +1,118 @@
+﻿<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bang du lieu san pham</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f3f4f6;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --border: #d1d5db;
+        --header: #f9fafb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      .wrap {
+        width: min(1200px, 96vw);
+        margin: 0 auto;
+        padding: 24px 0 48px;
+      }
+
+      header {
+        margin-bottom: 16px;
+      }
+
+      h1 {
+        margin: 0 0 6px;
+        font-size: 1.6rem;
+      }
+
+      .subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .table-wrap {
+        margin-top: 16px;
+        overflow-x: auto;
+        background: #fff;
+        border: 1px solid var(--border);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 820px;
+      }
+
+      th,
+      td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        vertical-align: top;
+        font-size: 0.92rem;
+      }
+
+      th {
+        background: var(--header);
+        font-weight: 600;
+      }
+
+      .status {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .error {
+        color: #b91c1c;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>Bang du lieu san pham</h1>
+        <p class="subtitle">Hien thi du lieu tu db.json theo dang bang.</p>
+      </header>
+
+      <div id="status" class="status">Dang tai du lieu...</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>title</th>
+              <th>category</th>
+              <th>price</th>
+              <th>description</th>
+              <th>creationAt</th>
+              <th>image</th>
+            </tr>
+          </thead>
+          <tbody id="grid"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
