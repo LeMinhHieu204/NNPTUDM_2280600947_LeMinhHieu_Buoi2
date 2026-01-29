@@ -3,116 +3,289 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bang du lieu san pham</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    <title>Bảng Quản Lý Sản Phẩm</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
-      :root {
-        --bg: #f3f4f6;
-        --text: #1f2937;
-        --muted: #6b7280;
-        --border: #d1d5db;
-        --header: #f9fafb;
-      }
-
       * {
+        margin: 0;
+        padding: 0;
         box-sizing: border-box;
       }
 
       body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        color: var(--text);
-        background: var(--bg);
+        background: linear-gradient(135deg, #808080 0%, #606060 100%);
+        min-height: 100vh;
+        padding-top: 20px;
+        padding-bottom: 40px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       }
 
       .wrap {
-        width: min(1200px, 96vw);
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 24px 0 48px;
       }
 
       header {
-        margin-bottom: 16px;
+        margin-bottom: 40px;
+        text-align: center;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
       }
 
       h1 {
-        margin: 0 0 6px;
-        font-size: 1.6rem;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: white;
       }
 
       .subtitle {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.95rem;
+        color: rgba(255,255,255,0.9);
+        font-size: 1.1rem;
       }
 
-      .table-wrap {
-        margin-top: 16px;
-        overflow-x: auto;
-        background: #fff;
-        border: 1px solid var(--border);
+      .toolbar {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        border-top: 4px solid #808080;
       }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 820px;
+      .search-section {
+        margin-bottom: 20px;
       }
 
-      th,
-      td {
-        padding: 10px 12px;
-        border-bottom: 1px solid var(--border);
-        text-align: left;
-        vertical-align: top;
-        font-size: 0.92rem;
+      .search-section .form-label {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 8px;
       }
 
-      th {
-        background: var(--header);
+      .search-section .form-control {
+        border: 2px solid #e0e0e0;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .search-section .form-control:focus {
+        border-color: #808080;
+        box-shadow: 0 0 0 0.2rem rgba(128, 128, 128, 0.25);
+      }
+
+      .form-label {
+        color: #2c3e50;
         font-weight: 600;
       }
 
+      .sort-buttons {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .sort-buttons .btn {
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .sort-buttons .btn-outline-primary {
+        color: #808080;
+        border-color: #808080;
+      }
+
+      .sort-buttons .btn-outline-primary:hover {
+        background-color: #808080;
+        border-color: #808080;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3);
+      }
+
+      .sort-buttons .btn-outline-success {
+        color: #707070;
+        border-color: #707070;
+      }
+
+      .sort-buttons .btn-outline-success:hover {
+        background-color: #707070;
+        border-color: #707070;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(112, 112, 112, 0.3);
+      }
+
+      .table-container {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        overflow: hidden;
+      }
+
+      .table {
+        margin-bottom: 0;
+      }
+
+      .table thead {
+        background: linear-gradient(135deg, #808080 0%, #606060 100%);
+        color: white;
+      }
+
+      .table thead th {
+        border: none;
+        font-weight: 700;
+        padding: 18px 15px;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+      }
+
+      .table tbody td {
+        padding: 15px;
+        vertical-align: middle;
+        border-color: #ecf0f1;
+      }
+
+      .table tbody tr {
+        transition: all 0.2s ease;
+      }
+
+      .table tbody tr:hover {
+        background-color: #f0f0f0;
+        transform: scale(1.01);
+        box-shadow: inset 0 0 0 1px #808080;
+      }
+
+      .badge {
+        padding: 6px 10px;
+        font-weight: 600;
+        font-size: 0.85rem;
+      }
+
+      .badge.bg-secondary {
+        background-color: #808080 !important;
+      }
+
+      .badge.bg-info {
+        background-color: #707070 !important;
+      }
+
+      .text-success {
+        color: #707070 !important;
+      }
+
+      .product-image {
+        max-width: 100px;
+        height: auto;
+        border-radius: 6px;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+      }
+
+      .product-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+
       .status {
-        margin-top: 12px;
-        color: var(--muted);
-        font-size: 0.9rem;
+        margin-top: 20px;
+        color: white;
+        font-size: 0.95rem;
+        text-align: center;
+        font-weight: 500;
       }
 
-      .error {
-        color: #b91c1c;
+      .alert {
+        border-radius: 8px;
+        border: none;
+        margin-top: 20px;
+        font-weight: 500;
       }
 
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        .toolbar {
+          padding: 15px;
+        }
+
+        .table {
+          font-size: 0.85rem;
+        }
+
+        .table thead th {
+          padding: 12px 8px;
+        }
+
+        .table tbody td {
+          padding: 10px 8px;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="wrap">
       <header>
-        <h1>Bang du lieu san pham</h1>
-        <p class="subtitle">Hien thi du lieu tu db.json theo dang bang.</p>
+        <h1>🛍️ Bảng Quản Lý Sản Phẩm</h1>
+        <p class="subtitle">Hiển thị dữ liệu sản phẩm từ cơ sở dữ liệu dưới dạng bảng</p>
       </header>
 
-      <div id="status" class="status">Dang tai du lieu...</div>
-      <div class="table-wrap">
-        <table>
+      <div class="toolbar">
+        <div class="search-section">
+          <label for="searchInput" class="form-label">Tìm kiếm theo tên sản phẩm</label>
+          <input
+            id="searchInput"
+            type="search"
+            class="form-control"
+            placeholder="Nhập tên sản phẩm..."
+            oninput="onChanged(event)"
+          />
+        </div>
+        
+        <div>
+          <label class="form-label d-block">Sắp xếp</label>
+          <div class="sort-buttons">
+            <button id="sortTitleAsc" class="btn btn-outline-primary btn-sm">Tên A-Z</button>
+            <button id="sortTitleDesc" class="btn btn-outline-primary btn-sm">Tên Z-A</button>
+            <button id="sortPriceAsc" class="btn btn-outline-success btn-sm">Giá tăng</button>
+            <button id="sortPriceDesc" class="btn btn-outline-success btn-sm">Giá giảm</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="table table-hover table-striped">
           <thead>
             <tr>
-              <th>id</th>
-              <th>title</th>
-              <th>category</th>
-              <th>price</th>
-              <th>description</th>
-              <th>creationAt</th>
-              <th>image</th>
+              <th>ID</th>
+              <th>Tên Sản Phẩm</th>
+              <th>Danh Mục</th>
+              <th>Giá</th>
+              <th>Mô Tả</th>
+              <th>Ngày Tạo</th>
+              <th>Hình Ảnh</th>
             </tr>
           </thead>
-          <tbody id="grid"></tbody>
+          <tbody id="grid">
+            <tr>
+              <td colspan="7" class="text-center py-4">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Đang tải...</span>
+                </div>
+                <p class="mt-2">Đang tải dữ liệu...</p>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
+
+      <div class="status" id="status"></div>
     </div>
 
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
