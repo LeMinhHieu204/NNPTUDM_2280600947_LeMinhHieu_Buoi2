@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js"></script>
+    <style>
+        .deleted-row td {
+            text-decoration: line-through;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        id
+                    </th>
+                    <th>
+                        title
+                    </th>
+                    <th>
+                        views
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <input type="text" placeholder="id (de trong de tao moi)" id="id_txt" />
+        <input type="text" placeholder="title" id="title_txt" />
+        <input type="text" placeholder="views" id="views_txt" />
+        <input type="submit" value="Save" onclick="Save()">
+    </div>
+    <hr />
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        comment id
+                    </th>
+                    <th>
+                        text
+                    </th>
+                    <th>
+                        postId
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="comment-body">
+
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <input type="text" placeholder="comment id (de trong de tao moi)" id="comment_id_txt" />
+        <input type="text" placeholder="text" id="comment_text_txt" />
+        <input type="text" placeholder="postId" id="comment_postid_txt" />
+        <input type="submit" value="Save Comment" onclick="SaveComment()">
+    </div>
+</body>
+
+</html>
