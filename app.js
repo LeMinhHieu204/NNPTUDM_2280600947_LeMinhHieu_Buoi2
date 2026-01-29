@@ -37,6 +37,26 @@ const normalizeImageUrl = (url) => {
 
 const PLACEHOLDER_IMAGE = "https://placehold.co/120x80?text=No+Image";
 
+const isAbsoluteUrl = (url) => /^https?:\/\//i.test(url);
+
+const getDataOrigin = () => {
+  try {
+    return new URL(DATA_URL).origin;
+  } catch (err) {
+    return "";
+  }
+};
+
+const resolveImageUrl = (item) => {
+  const primary = normalizeImageUrl(item?.images?.[0] ?? "");
+  if (primary && isAbsoluteUrl(primary)) return primary;
+
+  const categoryImage = normalizeImageUrl(item?.category?.image ?? "");
+  if (isAbsoluteUrl(categoryImage)) return categoryImage;
+
+  return "";
+};
+
 const renderRows = (items) => {
   if (!items.length) {
     els.grid.innerHTML = "";
@@ -51,11 +71,11 @@ const renderRows = (items) => {
       const formattedDate = isNaN(date.getTime())
         ? ""
         : date.toLocaleDateString("vi-VN");
-      const rawImageUrl = normalizeImageUrl(item.images?.[0] ?? "");
-      const imageUrl = proxyImage(rawImageUrl);
+      const rawImageUrl = resolveImageUrl(item);
+      const imageUrl = rawImageUrl;
       const imageCell = imageUrl
         ? `
-            <img src="${imageUrl}" alt="${item.title ?? ""}" style="max-width:120px; height:auto;"
+            <img src="${imageUrl}" alt="${item.title ?? ""}" referrerpolicy="no-referrer" style="max-width:120px; height:auto;"
               onerror="this.onerror=null; this.src='${PLACEHOLDER_IMAGE}';">
           `
         : "";
